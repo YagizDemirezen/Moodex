@@ -1,0 +1,14 @@
+{
+  "tr": {
+    "translation": {
+      "mainApp": "Ana Uygulama",
+      "bok": "Bok Türkçe Çeviri"
+    }
+  },
+  "en": {
+    "translation": {
+      "mainApp": "Main App",
+      "bok": "Poop English Translation"
+    }
+  }
+}
