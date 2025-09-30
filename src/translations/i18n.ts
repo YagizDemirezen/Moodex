@@ -8,13 +8,25 @@ const resources = translations;
 const locales = RNLocalize.getLocales();
 const languageTag = locales[0]?.languageCode || 'en';
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: languageTag,
-    fallbackLng: 'en',
-    interpolation: { escapeValue: false },
-  });
+const initI18n = () => {
+  if (!i18n.isInitialized) {
+    i18n
+      .use(initReactI18next)
+      .init({
+        resources,
+        lng: languageTag,
+        fallbackLng: 'en',
+        interpolation: { 
+          escapeValue: false 
+        },
+        react: {
+          useSuspense: false,
+        },
+        initImmediate: true,
+      });
+  }
+};
+
+initI18n();
 
 export default i18n;

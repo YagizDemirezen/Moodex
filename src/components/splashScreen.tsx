@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LottieView from "lottie-react-native";
 import LinearGradient from "react-native-linear-gradient";
+import Colors from "../utils/colors";
 
 interface SplashScreenProps {
   onFinish: () => void;
@@ -16,7 +17,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
 
   return (
     <LinearGradient
-      colors={['#a0e0ff', '#f3bbffff']}
+      colors={Colors.primaryGradient}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}

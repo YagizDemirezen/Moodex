@@ -2,13 +2,13 @@
   "tr": {
     "translation": {
       "mainApp": "Ana Uygulama",
-      "bok": "Bok Türkçe Çeviri"
+      "InternetConnectionFalse": "Moodex’in çalışması için internet bağlantınız gerekiyor"
     }
   },
   "en": {
     "translation": {
       "mainApp": "Main App",
-      "bok": "Poop English Translation"
+      "InternetConnectionFalse": "Moodex requires an internet connection to work."
     }
   }
 }

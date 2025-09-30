@@ -3,7 +3,8 @@ import { View, Text, Animated, StyleSheet } from "react-native";
 import SplashScreen from "./src/components/splashScreen";
 import './src/translations/i18n';
 import { useTranslation } from 'react-i18next';
-
+import NetworkGuard from "./src/utils/NetworkGuard";
+import Colors from "./src/utils/colors";
 
 const App: React.FC = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -32,7 +33,9 @@ const App: React.FC = () => {
 
       {!showSplash && (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>{t("bok")}</Text>
+          <NetworkGuard>
+           <Text style={{ color: Colors.text }}>{t("mainApp")}</Text>
+          </NetworkGuard>
         </View>
       )}
     </View>
