@@ -1,0 +1,3 @@
+Organization: Yagiz_Demirezen
+Project Name: Moodex
+Region: Frankfurt, Germany (eu-central-1)

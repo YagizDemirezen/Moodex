@@ -1,44 +1,50 @@
-import React, { useState, useRef } from "react";
-import { View, Text, Animated, StyleSheet } from "react-native";
-import SplashScreen from "./src/components/splashScreen";
-import './src/translations/i18n';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { enableScreens } from "react-native-screens";
+import HomeScreen from "./src/screens/HomeScreen";
+import LoginScreen from "./src/screens/LoginScreen";
 import NetworkGuard from "./src/utils/NetworkGuard";
+import SplashNavigatorWrapper from "./src/components/SplashScreenNavigatorWrapper";
+import GradientBackground from "./src/components/GradientBackground";
 import Colors from "./src/utils/colors";
 
+enableScreens();
+
+const Stack = createNativeStackNavigator();
+
 const App: React.FC = () => {
-  const [showSplash, setShowSplash] = useState(true);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
-  const { t } = useTranslation();
-
-  const handleSplashFinish = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: true,
-    }).start(() => {
-      setShowSplash(false);
-    });
-  };
-
   return (
-    <View style={{ flex: 1 }}>
-      {showSplash && (
-        <Animated.View style={{ ...StyleSheet.absoluteFillObject, opacity: fadeAnim }}
-        pointerEvents={"none"}
-        >
-          <SplashScreen onFinish={handleSplashFinish} />
-        </Animated.View>
-      )}
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: "fade",
+          contentStyle: { backgroundColor: Colors.tertiary }, //Ssssh they will don't notice. It is the Yağız's trick (Mixed primary and secondary colors)
+        }}
+        initialRouteName="Splash"
+      >
+        <Stack.Screen name="Splash" component={SplashNavigatorWrapper} />
 
-      {!showSplash && (
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <NetworkGuard>
-           <Text style={{ color: Colors.text }}>{t("mainApp")}</Text>
-          </NetworkGuard>
-        </View>
-      )}
-    </View>
+        <Stack.Screen name="Home">
+          {(props) => (
+            <NetworkGuard>
+              <GradientBackground>
+                <HomeScreen {...props} />
+              </GradientBackground>
+            </NetworkGuard>
+          )}
+        </Stack.Screen>
+
+        <Stack.Screen name="Login">
+          {(props) => (
+            <GradientBackground>
+              <LoginScreen {...props} />
+            </GradientBackground>
+          )}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LottieView from "lottie-react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Colors from "../utils/colors";
+import { getUserToken } from "../utils/SessionController";
 
 interface SplashScreenProps {
   onFinish: () => void;
@@ -9,6 +10,13 @@ interface SplashScreenProps {
 
 const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
   const [showAnimation, setShowAnimation] = useState(true);
+
+  useEffect(() => {
+    const initSession = async () => {
+      await getUserToken();
+    };
+    initSession();
+  }, []);
 
   const handleFinish = () => {
     setShowAnimation(false);
@@ -20,11 +28,11 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
       colors={Colors.primaryGradient}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
       {showAnimation && (
         <LottieView
-          source={require('../res/splashScreen.json')}
+          source={require("../res/splashScreen.json")}
           autoPlay
           loop={false}
           onAnimationFinish={handleFinish}
