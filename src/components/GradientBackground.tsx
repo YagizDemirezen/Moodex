@@ -1,12 +1,22 @@
+import React from "react";
+import { StyleSheet } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { View, StyleSheet } from 'react-native';
 import Colors from "../utils/colors";
+const GradientBackground: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <LinearGradient
+      colors={Colors.primaryGradient}
+      style={styles.background}
+    >
+      {children}
+    </LinearGradient>
+  );
+};
 
-const GradientBackground: React.FC<{children: React.ReactNode}> = ({ children }) => (
-  <View style={StyleSheet.absoluteFill}>
-    <LinearGradient colors={Colors.primaryGradient} style={StyleSheet.absoluteFill} />
-    {children}
-  </View>
-);
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+  },
+});
 
 export default GradientBackground;

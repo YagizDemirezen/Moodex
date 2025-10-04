@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import SplashScreen from "./splashScreen";
-import { isUserLoggedIn } from "../utils/SessionController";
+import SplashScreen from "../screens/SplashScreen";
+import { supabase } from "../services/SupabaseClient";
+import checkUserInfo from "../services/CheckUserData";
 
 const SplashNavigatorWrapper: React.FC = () => {
   const navigation = useNavigation<any>();
@@ -10,12 +11,37 @@ const SplashNavigatorWrapper: React.FC = () => {
   const handleFinish = async () => {
     setSplashDone(true);
 
-    const loggedIn = await isUserLoggedIn();
+    try {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
-    navigation.reset({
-      index: 0,
-      routes: [{ name: loggedIn ? "Home" : "Login" }],
-    });
+      const loggedIn = !!session;
+
+      if (loggedIn) {
+        const userId = session.user.id;
+
+        const isUserGiveInformation = await checkUserInfo(userId, "profiles", "isUserGiveInformation");
+
+        navigation.reset({
+          index: 0,
+          routes: [
+            { name: isUserGiveInformation ? "Home" : "Welcome" },
+          ],
+        });
+      } else {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Welcome" }],
+        });
+      }
+    } catch (error) {
+      console.error("❌ Error checking session:", error);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Welcome" }],
+      });
+    }
   };
 
   if (!splashDone) return <SplashScreen onFinish={handleFinish} />;

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import LottieView from "lottie-react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Colors from "../utils/colors";
-import { getUserToken } from "../utils/SessionController";
+import { supabase } from "../services/SupabaseClient";
 
 interface SplashScreenProps {
-  onFinish: () => void;
+  onFinish: (isLoggedIn: boolean) => void; 
 }
 
 const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
@@ -13,14 +13,28 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
 
   useEffect(() => {
     const initSession = async () => {
-      await getUserToken();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      
+      const isLoggedIn = !!session;
+      
+      // Animasyon bitince parent component’e durumu gönder
+      if (!showAnimation) onFinish(isLoggedIn);
     };
+
     initSession();
   }, []);
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     setShowAnimation(false);
-    onFinish();
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    const isLoggedIn = !!session;
+    onFinish(isLoggedIn);
   };
 
   return (

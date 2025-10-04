@@ -7,8 +7,6 @@ import { useTranslation } from 'react-i18next';
 import styles from "../../styles/noInternetCardStyle";
 import LottieView from "lottie-react-native";
 
-
-
 const NoInternetCard: React.FC = () => {
     const { t } = useTranslation();
   return (
@@ -26,7 +24,8 @@ const NoInternetCard: React.FC = () => {
             loop
             style={styles.animation}
         />
-      </LinearGradient>
+        <Text style={styles.text}>{t("InternetConnectionWaiting")}</Text>
+      </LinearGradient>   
     </View>
   );
 };

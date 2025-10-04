@@ -2,13 +2,15 @@
   "tr": {
     "translation": {
       "mainApp": "Ana Uygulama",
-      "InternetConnectionFalse": "Moodex’in çalışması için internet bağlantınız gerekiyor"
+      "InternetConnectionFalse": "Moodex’in çalışması için internet bağlantın gerekiyor",
+      "InternetConnectionWaiting": "İnternete bağlanmanı bekliyoruz"
     }
   },
   "en": {
     "translation": {
       "mainApp": "Main App",
-      "InternetConnectionFalse": "Moodex requires an internet connection to work."
+      "InternetConnectionFalse": "Moodex requires an internet connection to work.",
+      "InternetConnectionWaiting": "Waiting to reconnect to the internet"
     }
   }
 }

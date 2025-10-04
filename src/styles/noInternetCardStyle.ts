@@ -7,8 +7,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card: {
-    width: 250,
-    height: 200,
+    width: 300,
+    height: 300,
+    borderWidth: 2,
+    borderColor: "#000000ff",
     borderRadius: 24,
     justifyContent: "center",
     alignItems: "center",
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
   animation: {
     width: 100,
     height: 100,
-    marginTop: 16,
+    margin: 16,
   },
 });
 

@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/res/fonts/Fira Sans Black.ttf",
+      "sha1": "d4f1f6397ae7e9ec9a079df6bf05164493216d2c"
+    },
+    {
+      "path": "src/res/fonts/PoetsenOne.ttf",
+      "sha1": "90edb2edd900ad302faeab3b1f0f0b5548649dda"
+    }
+  ]
+}
