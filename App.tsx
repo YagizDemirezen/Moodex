@@ -6,6 +6,7 @@ import AppNavigator from "./src/navigation/AppNavigator";
 import { enableScreens } from "react-native-screens";
 import NetworkGuard from './src/utils/NetworkGuard';
 import GradientBackground from './src/components/GradientBackground';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 enableScreens();
 
@@ -16,11 +17,13 @@ const App: React.FC = () => {
 
   return (
     <NavigationContainer>
-      <NetworkGuard>
-        <GradientBackground>
-          <AppNavigator />
-        </GradientBackground>
-      </NetworkGuard>
+      <RootSiblingParent>
+        <NetworkGuard>
+          <GradientBackground>
+            <AppNavigator />
+          </GradientBackground>
+        </NetworkGuard>
+      </RootSiblingParent>
     </NavigationContainer>
   );
 };

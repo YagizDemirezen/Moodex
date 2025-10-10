@@ -1,14 +1,14 @@
 import { supabase } from "./SupabaseClient";
-
+//SADECE GOOGLE İÇİN
 const checkUserInfo = async (
-  userId: string,
+  google_id: string,
   tableName: string,
   column: string
 ): Promise<boolean> => {
   const { data, error } = await supabase
     .from<any, any>(tableName)   // <any, any> ekledik
     .select(column)
-    .eq("userId", userId)
+    .eq("google_id", google_id)
     .maybeSingle();
 
   if (error) {

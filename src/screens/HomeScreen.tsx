@@ -7,7 +7,7 @@ const HomeScreen: React.FC = () => {
   const navigation = useNavigation<any>();
 
   const handleLogout = async () => {
-    await logout(); // supabase logout
+    await logout(); 
     navigation.reset({
       index: 0,
       routes: [{ name: "Welcome" }],

@@ -1,9 +1,8 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import handleGoogleLogin from "../services/HandleGoogle";
+import handleGoogle from "../services/HandleGoogle";
 import styles from "../styles/ContinueStyle";
-import ensureUserProfile from "../services/EnsureUserProfile";
 import checkUserdata from "../services/CheckUserData";
 
 const ContinueWithGoogle = () => {
@@ -11,15 +10,13 @@ const ContinueWithGoogle = () => {
 
   const onPress = async () => {
     try {
-      const data = await handleGoogleLogin();
+      const data = await handleGoogle();
 
       if (data?.user) {
-        const userId = data.user.id;
-
-        await ensureUserProfile(userId);
+        const google_id = data.user.id;
 
         const isUserGiveInformation = await checkUserdata(
-          userId,
+          google_id,
           "profiles",
           "isUserGiveInformation"
         );

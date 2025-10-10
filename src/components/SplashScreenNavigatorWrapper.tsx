@@ -26,7 +26,7 @@ const SplashNavigatorWrapper: React.FC = () => {
         navigation.reset({
           index: 0,
           routes: [
-            { name: isUserGiveInformation ? "Home" : "Welcome" },
+            { name: isUserGiveInformation ? "Home" : "BasicInformationScreen" },
           ],
         });
       } else {

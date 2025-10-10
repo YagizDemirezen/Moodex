@@ -19,7 +19,6 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
       
       const isLoggedIn = !!session;
       
-      // Animasyon bitince parent component’e durumu gönder
       if (!showAnimation) onFinish(isLoggedIn);
     };
 
