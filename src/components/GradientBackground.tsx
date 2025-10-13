@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Colors from "../utils/colors";
+import Colors from "../utils/MainStyles";
 const GradientBackground: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <LinearGradient

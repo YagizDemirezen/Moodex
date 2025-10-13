@@ -18,7 +18,6 @@ type BasicInfo = {
   age: string;
   country: string;
   city: string;
-  pronouns: string;
 };
 
 const BasicInformationScreen: React.FC = () => {
@@ -29,22 +28,21 @@ const BasicInformationScreen: React.FC = () => {
     age: "",
     country: "",
     city: "",
-    pronouns: "",
   });
 
   const handleNext = () => {
     if (!form.name || !form.age || !form.country) {
       Toast.show("Lütfen zorunlu alanları doldur.", {
-        duration: Toast.durations.LONG,
+        duration: Toast.durations.SHORT,
         position: Toast.positions.BOTTOM,
         shadow: true,
         animation: true,
-        hideOnPress: false,
+        hideOnPress: true,
         backgroundColor: "#f44336",
         textColor: "#fff",
         opacity: 1,
         textStyle: { fontWeight: "600", fontSize: 16 },
-        containerStyle: { marginBottom: 50, padding: 15, borderRadius: 10},
+        containerStyle: { marginBottom: 28, padding: 15, borderRadius: 10 },
       });
       return;
     }
@@ -97,14 +95,6 @@ const BasicInformationScreen: React.FC = () => {
             style={styles.input}
           />
 
-          <Text style={styles.label}>Zamir (isteğe bağlı)</Text>
-          <TextInput
-            placeholder="örn. o / she / he / they"
-            value={form.pronouns}
-            onChangeText={(v) => setForm({ ...form, pronouns: v })}
-            style={styles.input}
-          />
-
           <TouchableOpacity style={styles.button} onPress={handleNext}>
             <Text style={styles.buttonText}>Devam Et ➜</Text>
           </TouchableOpacity>
@@ -124,9 +114,9 @@ export default BasicInformationScreen;
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: "#fff" },
   container: { padding: 20, paddingBottom: 40 },
-  title: { fontSize: 26, fontWeight: "bold", marginBottom: 8 },
-  subtitle: { fontSize: 15, color: "#666", marginBottom: 24 },
-  label: { fontSize: 14, fontWeight: "600", marginBottom: 6 },
+  title: { fontSize: 26, fontWeight: "bold", marginBottom: 25 },
+  subtitle: { fontSize: 15, color: "#666", marginBottom: 50 },
+  label: { fontSize: 14, fontWeight: "600", marginBottom: 10 },
   input: {
     borderWidth: 1,
     borderColor: "#ddd",

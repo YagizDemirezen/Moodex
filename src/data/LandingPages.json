@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "title": "Moodex’e Hoş Geldin 🌤️",
+    "description": "Ruh halini anla, iyileştir ve dengede kal. Moodex, her gününü daha farkında ve motive geçirmeni sağlar.",
+    "image": "../res/MoodexLogo.png"
+  },
+  {
+    "id": "2",
+    "title": "Sana Özel Öneriler 💫",
+    "description": "Moodex, ruh halini analiz eder ve sana tamamen kişiselleştirilmiş motivasyon ve öneriler sunar. Her gününü daha dengeli, motive ve keyifli yaşa.",
+    "image": "../res/MoodexLogo.png"
+  },
+  {
+    "id": "3",
+    "title": "Hazırsan Başlayalım 🚀",
+    "description": "Kendini keşfetmeye başla ve Moodex ile her gününü daha renkli, motive ve dengeli geçir. Yapay zekamız senin yanında!",
+    "image": "../res/MoodexLogo.png"
+  }
+]

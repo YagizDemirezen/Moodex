@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LottieView from "lottie-react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Colors from "../utils/colors";
+import Colors from "../utils/MainStyles";
 import { supabase } from "../services/SupabaseClient";
 
 interface SplashScreenProps {

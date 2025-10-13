@@ -1,14 +1,20 @@
 {
   "tr": {
     "translation": {
-      "mainApp": "Ana Uygulama",
       "InternetConnectionFalse": "Moodex’in çalışması için internet bağlantın gerekiyor",
-      "InternetConnectionWaiting": "İnternete bağlanmanı bekliyoruz"
+      "InternetConnectionWaiting": "İnternete bağlanmanı bekliyoruz",
+      "Email": "E-posta",
+      "Password": "Şifre",
+      "ForgetPassword": "Şifremi unuttum",
+      "SignIn": "Giriş Yap",
+      "NoAccount": "Hesabın yok mu? ",
+      "SignUp": "Kayıt Ol",
+      "Or": "veya"
+
     }
   },
   "en": {
     "translation": {
-      "mainApp": "Main App",
       "InternetConnectionFalse": "Moodex requires an internet connection to work.",
       "InternetConnectionWaiting": "Waiting to reconnect to the internet"
     }

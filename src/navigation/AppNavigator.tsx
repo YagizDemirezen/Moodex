@@ -5,7 +5,7 @@ import BasicInformationScreen from "../screens/BasicInformationScreen";
 import HomeScreen from "../screens/HomeScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import SplashNavigatorWrapper from "../components/SplashScreenNavigatorWrapper";
-import Colors from "../utils/colors";
+import Colors from "../utils/MainStyles";
 import InterestScreen from "../screens/InterestInformationScreen";
 enableScreens();
 

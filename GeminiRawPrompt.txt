@@ -24,7 +24,6 @@ User Profile (example format):
   "age": 23,
   "country": "France",
   "city": "Paris",
-  "pronouns": "NULL",
   "hobbies": ["music", "cinema"],
   "profession": "Chef",
   "pet": [

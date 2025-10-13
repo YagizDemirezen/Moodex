@@ -1,14 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Colors from "../../utils/colors";
-import '../../translations/i18n';
-import { useTranslation } from 'react-i18next';
+import Colors from "../../utils/MainStyles";
 import styles from "../../styles/noInternetCardStyle";
 import LottieView from "lottie-react-native";
-
+import translate from "../../translations/translate";
 const NoInternetCard: React.FC = () => {
-    const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -17,14 +14,14 @@ const NoInternetCard: React.FC = () => {
         end={{ x: 1, y: 1 }}
         style={styles.card}
       >
-        <Text style={styles.text}>{t("InternetConnectionFalse")}</Text>
+        <Text style={styles.text}>{translate("InternetConnectionFalse")}</Text>
         <LottieView
             source={require("../../res/NoInternet.json")}
             autoPlay
             loop
             style={styles.animation}
         />
-        <Text style={styles.text}>{t("InternetConnectionWaiting")}</Text>
+        <Text style={styles.text}>{translate("InternetConnectionWaiting")}</Text>
       </LinearGradient>   
     </View>
   );

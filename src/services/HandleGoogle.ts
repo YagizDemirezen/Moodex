@@ -1,12 +1,6 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { supabase } from './SupabaseClient';
-import { WEB_CLIENT_ID_FROM_GOOGLE } from '@env';
 import { ensureGoogleProfile } from './EnsureUserProfile';
-
-GoogleSignin.configure({
-  webClientId: WEB_CLIENT_ID_FROM_GOOGLE,
-  offlineAccess: true,
-});
 
 const handleGoogle = async () => {
   try {
@@ -33,7 +27,6 @@ const handleGoogle = async () => {
 
     console.log('✅ Login success:', data);
 
-    // Profil oluştur / al
     if (data?.user) {
       const profile = await ensureGoogleProfile(
         data.user.id,
