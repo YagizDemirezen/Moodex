@@ -1,50 +1,76 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { supabase } from './SupabaseClient';
-import { ensureGoogleProfile } from './EnsureUserProfile';
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { supabase } from "./SupabaseClient";
+import { CreateAndUpdateGoogleProfile, UserProfile } from "./UserProfileManager";
+import { NavigationProp } from "@react-navigation/native";
 
-const handleGoogle = async () => {
+export interface GoogleUserProfile {
+  fullName: string | null;
+  name: string | null;
+  surname: string | null;
+  email: string | null;
+  avatarUrl: string | null;
+}
+
+const handleGoogle = async (navigation: NavigationProp<any>): Promise<GoogleUserProfile | null> => {
   try {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     await GoogleSignin.signOut();
 
     const userInfo = await GoogleSignin.signIn();
-    console.log("Google user:", userInfo);
+    console.log("Google user raw info:", userInfo);
 
     const tokens = await GoogleSignin.getTokens();
     const idToken = tokens.idToken;
-
     if (!idToken) throw new Error("Google Sign-In'den idToken alınamadı");
 
     const { data, error } = await supabase.auth.signInWithIdToken({
-      provider: 'google',
+      provider: "google",
       token: idToken,
     });
 
-    if (error) {
-      console.error('❌ Supabase login error:', error.message);
+    if (error || !data?.user) {
+      console.error("❌ Supabase login error:", error?.message);
       return null;
     }
 
-    console.log('✅ Login success:', data);
+    const authId = data.user.id;           // ✅ Auth ID
+    const userMetadata = data.user.user_metadata || {};
+    const googleId = userMetadata.sub || authId;
+    const fullName =
+      userMetadata.full_name || `${userMetadata.name || ""} ${userMetadata.surname || ""}`.trim() || null;
+    const name = userMetadata.name || null;
+    const surname = userMetadata.surname || null;
+    const email = userMetadata.email || data.user.email || null;
+    const avatarUrl = userMetadata.avatar_url || null;
 
-    if (data?.user) {
-      const profile = await ensureGoogleProfile(
-        data.user.id,
-        data.user.user_metadata.full_name || data.user.user_metadata.name,
-        data.user.user_metadata.email,
-        data.user.user_metadata.avatar_url
-      );
+    const profile: UserProfile | null = await CreateAndUpdateGoogleProfile(
+      authId,
+      googleId,
+      userMetadata,
+      email,
+      avatarUrl
+    );
 
-      if (!profile) {
-        console.error('❌ Profil oluşturulamadı veya alınamadı');
-      } else {
-        console.log('✅ Profile oluşturuldu/güncellendi:', profile);
-      }
+    if (!profile) {
+      console.error("❌ Profil oluşturulamadı veya alınamadı");
+      return null;
     }
 
-    return data;
+    console.log("✅ Profile oluşturuldu/güncellendi:", profile);
+
+    // Navigation: isusergiveinformation kontrolü
+    navigation.reset({
+      index: 0,
+      routes: [
+        {
+          name: profile.isusergiveinformation ? "Home" : "BasicInformationScreen",
+        },
+      ],
+    });
+
+    return { fullName, name, surname, email, avatarUrl };
   } catch (err) {
-    console.error('❌ Google Sign-In error:', err);
+    console.error("❌ Google Sign-In error:", err);
     return null;
   }
 };

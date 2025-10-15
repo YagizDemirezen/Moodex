@@ -3,35 +3,41 @@ import { useNavigation } from "@react-navigation/native";
 import SplashScreen from "../screens/SplashScreen";
 import LandingScreen from "../screens/LandingScreen";
 import { supabase } from "../services/SupabaseClient";
-import checkUserInfo from "../services/CheckUserData";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import resetLandingFromStorage from "../utils/resetLandingFromStorage";
+import { CheckUserInfo } from "../services/UserProfileManager";
 import resetSessionFromSupabase from "../utils/resetSessionFromSupabase";
-const SplashNavigatorWrapper: React.FC = () => {
-  //resetLandingFromStorage(); //RESET Landing storage for testing purposes
-  //resetSessionFromSupabase
+import resetLandingFromStorage from "../utils/resetLandingFromStorage";
 
+const SplashNavigatorWrapper: React.FC = () => {
+  useEffect(() => { 
+  const init = async () => { 
+    //await resetSessionFromSupabase(); 
+    //await resetLandingFromStorage(); 
+  }; 
+  init(); 
+}, []);
   const navigation = useNavigation<any>();
   const [currentStep, setCurrentStep] = useState<"splash" | "landing" | "done">("splash");
 
   const handleSplashFinish = async () => {
     try {
       const hasSeenLanding = await AsyncStorage.getItem("hasSeenLanding");
-      console.log("HasSeenLandingReset:" + hasSeenLanding)
+      console.log("HasSeenLandingReset:", hasSeenLanding);
+
       if (hasSeenLanding === "true") {
-        handleAppFlow();
+        await handleAppFlow();
       } else {
         setCurrentStep("landing");
       }
     } catch (error) {
       console.error("Landing kontrol hatası:", error);
-      handleAppFlow();
+      await handleAppFlow();
     }
   };
 
   const handleLandingFinish = async () => {
     await AsyncStorage.setItem("hasSeenLanding", "true");
-    handleAppFlow();
+    await handleAppFlow();
   };
 
   const handleAppFlow = async () => {
@@ -41,21 +47,25 @@ const SplashNavigatorWrapper: React.FC = () => {
       } = await supabase.auth.getSession();
 
       const loggedIn = !!session;
-      console.log("logged control", loggedIn)
+      console.log("logged control:", loggedIn);
 
-      if (loggedIn) {
+      if (loggedIn && session?.user?.id) {
         const userId = session.user.id;
 
-        const isUserGiveInformation = await checkUserInfo(
-          userId,
+        const isUserGiveInformation = await CheckUserInfo(
           "profiles",
-          "isUserGiveInformation"
+          userId,
+          "isusergiveinformation"
         );
+
+        console.log("isUserGiveInformation:", isUserGiveInformation);
 
         navigation.reset({
           index: 0,
           routes: [
-            { name: isUserGiveInformation ? "Home" : "BasicInformationScreen" },
+            {
+              name: isUserGiveInformation ? "Home" : "BasicInformationScreen",
+            },
           ],
         });
       } else {
@@ -76,7 +86,6 @@ const SplashNavigatorWrapper: React.FC = () => {
     }
   };
 
-  // 🖼️ Ekran seçimi
   if (currentStep === "splash") {
     return <SplashScreen onFinish={handleSplashFinish} />;
   }
@@ -85,7 +94,7 @@ const SplashNavigatorWrapper: React.FC = () => {
     return <LandingScreen onFinish={handleLandingFinish} />;
   }
 
-  return null; // işlem bittiğinde navigasyon reset olduğu için boş döner
+  return null;
 };
 
 export default SplashNavigatorWrapper;

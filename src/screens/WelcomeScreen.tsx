@@ -118,7 +118,7 @@ const WelcomeScreen: React.FC<{ route: RouteProp<ParamListBase, "Welcome">; navi
               {/* Google ile giriş */}
               <TouchableOpacity
                 style={styles.googleButton}
-                onPress={async () => await handleGoogle()}
+                onPress={async () => await handleGoogle(navigation)}
               >
                 <Image
                   source={require("../res/GoogleIcon.png")}
