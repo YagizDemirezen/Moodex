@@ -44,6 +44,7 @@ const WelcomeScreen: React.FC<{ route: RouteProp<ParamListBase, "Welcome">; navi
               <TextInput
                 style={styles.input}
                 value={email}
+                placeholder={translate("EmailPlaceholder") + "@gmail.com"}
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -53,8 +54,9 @@ const WelcomeScreen: React.FC<{ route: RouteProp<ParamListBase, "Welcome">; navi
               <Text style={styles.inputLabel}>{translate("Password")}</Text>
               <View style={{ position: "relative", width: "100%" }}>
                 <TextInput
-                  style={[styles.input, { paddingRight: 40 }]} // sağa göz için boşluk
+                  style={[styles.input, { paddingRight: 40 }]}
                   value={password}
+                  placeholder={translate("PasswordPlaceholder")}
                   onChangeText={setPassword}
                   secureTextEntry={!passwordVisible}
                   keyboardType="default"
@@ -74,8 +76,8 @@ const WelcomeScreen: React.FC<{ route: RouteProp<ParamListBase, "Welcome">; navi
                   <Image
                     source={
                       passwordVisible
-                        ? require("../res/GoogleIcon.png")
-                        : require("../res/GoogleIcon.png")
+                        ? require("../res/passwordOpenEye.png")
+                        : require("../res/passwordClosedEye.png")
                     }
                     style={{ width: 24, height: 24 }}
                   />

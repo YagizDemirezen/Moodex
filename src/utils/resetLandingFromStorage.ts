@@ -1,15 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect } from "react";
 
-const resetLandingFromStorage = async () => {
-  useEffect(() => {
-  const resetLanding = async () => {
+const resetLandingFromStorage = async (): Promise<void> => {
+  try {
     await AsyncStorage.removeItem("hasSeenLanding");
     console.log("✅ Landing sıfırlandı — yeniden gösterilecek.");
-  };
-
-  resetLanding();
-}, []);
-}
+  } catch (error) {
+    console.error("❌ Landing sıfırlama hatası:", error);
+  }
+};
 
 export default resetLandingFromStorage;

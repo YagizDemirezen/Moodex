@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import MainStyles from "../utils/MainStyles";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,12 +11,12 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     borderWidth: 2,
-    borderColor: "#000000ff",
+    borderColor: MainStyles.textPrimaryColor,
     borderRadius: 24,
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
-    shadowColor: "#ffffffff",
+    shadowColor: MainStyles.textOnBackgroundColor,
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 8,
@@ -23,7 +24,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    color: "#000",
+    color: MainStyles.textPrimaryColor,
+    fontFamily: MainStyles.SubtitleFont,
     textAlign: "center",
   },
   animation: {

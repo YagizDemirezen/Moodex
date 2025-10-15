@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LottieView from "lottie-react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Colors from "../utils/MainStyles";
+import MainStyles from "../utils/MainStyles";
 import { supabase } from "../services/SupabaseClient";
 
 interface SplashScreenProps {
@@ -38,7 +38,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
 
   return (
     <LinearGradient
-      colors={Colors.primaryGradient}
+      colors={MainStyles.primaryGradient}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -49,7 +49,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
           autoPlay
           loop={false}
           onAnimationFinish={handleFinish}
-          style={{ width: 300, height: 300 }}
+          style={{ width: 300, height: 300}}
         />
       )}
     </LinearGradient>

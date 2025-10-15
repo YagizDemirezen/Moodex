@@ -5,15 +5,19 @@ import LandingScreen from "../screens/LandingScreen";
 import { supabase } from "../services/SupabaseClient";
 import checkUserInfo from "../services/CheckUserData";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import resetLanding from "../utils/resetLandingFromStorage";
+import resetLandingFromStorage from "../utils/resetLandingFromStorage";
+import resetSessionFromSupabase from "../utils/resetSessionFromSupabase";
 const SplashNavigatorWrapper: React.FC = () => {
-  resetLanding(); //RESET Landing storage for testing purposes
+  //resetLandingFromStorage(); //RESET Landing storage for testing purposes
+  //resetSessionFromSupabase
+
   const navigation = useNavigation<any>();
   const [currentStep, setCurrentStep] = useState<"splash" | "landing" | "done">("splash");
 
   const handleSplashFinish = async () => {
     try {
       const hasSeenLanding = await AsyncStorage.getItem("hasSeenLanding");
+      console.log("HasSeenLandingReset:" + hasSeenLanding)
       if (hasSeenLanding === "true") {
         handleAppFlow();
       } else {
@@ -37,6 +41,7 @@ const SplashNavigatorWrapper: React.FC = () => {
       } = await supabase.auth.getSession();
 
       const loggedIn = !!session;
+      console.log("logged control", loggedIn)
 
       if (loggedIn) {
         const userId = session.user.id;

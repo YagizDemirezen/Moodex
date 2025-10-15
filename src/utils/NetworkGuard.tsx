@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { View, Text} from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import NoInternetCard from "../components/cards/noInternetCard";
+import GradientBackground from "../components/GradientBackground";
 
 interface NetworkGuardProps {
   children: ReactNode;
@@ -22,9 +23,12 @@ const NetworkGuard: React.FC<NetworkGuardProps> = ({ children }) => {
 
   if(!isConnected && isConnected !== null) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <NoInternetCard />
-      </View>
+      <GradientBackground>
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          {/*Image gelecek Üzgün Moodex */}
+          <NoInternetCard />
+        </View>
+      </GradientBackground>
     );
   }
   return <>{children}</>;

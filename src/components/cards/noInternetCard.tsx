@@ -5,6 +5,7 @@ import Colors from "../../utils/MainStyles";
 import styles from "../../styles/noInternetCardStyle";
 import LottieView from "lottie-react-native";
 import translate from "../../translations/translate";
+
 const NoInternetCard: React.FC = () => {
   return (
     <View style={styles.container}>

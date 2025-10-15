@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? 25 : 0,
   },
   page: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
     padding: 20,

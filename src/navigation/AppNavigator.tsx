@@ -17,7 +17,7 @@ const AppNavigator: React.FC = () => {
       initialRouteName="Splash"
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: Colors.tertiary },
+        contentStyle: { backgroundColor: Colors.tertiaryColor },
         animation: 'fade_from_bottom',
       }}
     >
