@@ -97,7 +97,7 @@ const WelcomeScreen: React.FC<{ route: RouteProp<ParamListBase, "Welcome">; navi
                 style={styles.loginButton}
                 onPress={() => console.log("Giriş yap tıklandı")}
               >
-                <Text style={styles.loginButtonText}>{translate("SignUp")}</Text>
+                <Text style={styles.loginButtonText}>{translate("SignIn")}</Text>
               </TouchableOpacity>
 
               {/* Kayıt Ol */}
